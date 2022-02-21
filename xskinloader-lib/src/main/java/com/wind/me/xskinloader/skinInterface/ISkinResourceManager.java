@@ -3,8 +3,11 @@ package com.wind.me.xskinloader.skinInterface;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.ColorRes;
-import android.support.annotation.DrawableRes;
+import android.graphics.drawable.StateListDrawable;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
+
 
 /**
  * Created by xiawanli on 2018/1/10.
@@ -28,5 +31,7 @@ public interface ISkinResourceManager {
 
     Drawable getDrawableForMapmip(int attrValueRefId) throws Resources.NotFoundException;
 
-    ;
+    ColorStateList getSelectorColor(int paramInt);
+
+    StateListDrawable getSelectorDrawable(int paramInt);
 }

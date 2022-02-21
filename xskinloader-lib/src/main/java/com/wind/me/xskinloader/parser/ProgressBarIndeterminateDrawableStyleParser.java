@@ -6,9 +6,9 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ProgressBar;
 
-import com.wind.me.xskinloader.SkinResDeployerFactory;
 import com.wind.me.xskinloader.entity.SkinAttr;
 import com.wind.me.xskinloader.entity.SkinConfig;
+import com.wind.me.xskinloader.entity.SkinConstant;
 import com.wind.me.xskinloader.skinInterface.ISkinStyleParser;
 import com.wind.me.xskinloader.util.ReflectUtils;
 
@@ -35,21 +35,19 @@ public class ProgressBarIndeterminateDrawableStyleParser implements ISkinStylePa
 
         final TypedArray a = context.obtainStyledAttributes(attrs, progressBarStyleList, 0, 0);
 
-        if (a != null) {
-            int n = a.getIndexCount();
-            for (int j = 0; j < n; j++) {
-                int attr = a.getIndex(j);
-                if (attr == progressBarIndeterminateDrawableIndex &&
-                        SkinConfig.isCurrentAttrSpecified(SkinResDeployerFactory.PROGRESSBAR_INDETERMINATE_DRAWABLE, specifiedAttrList)) {
-                    int drawableResId = a.getResourceId(attr, -1);
-                    SkinAttr skinAttr = SkinAttributeParser.parseSkinAttr(context, SkinResDeployerFactory.PROGRESSBAR_INDETERMINATE_DRAWABLE, drawableResId);
-                    if (skinAttr != null) {
-                        viewAttrs.put(skinAttr.attrName, skinAttr);
-                    }
+        int n = a.getIndexCount();
+        for (int j = 0; j < n; j++) {
+            int attr = a.getIndex(j);
+            if (attr == progressBarIndeterminateDrawableIndex &&
+                    SkinConfig.isCurrentAttrSpecified(SkinConstant.PROGRESSBAR_INDETERMINATE_DRAWABLE, specifiedAttrList)) {
+                int drawableResId = a.getResourceId(attr, -1);
+                SkinAttr skinAttr = SkinAttributeParser.parseSkinAttr(context, SkinConstant.PROGRESSBAR_INDETERMINATE_DRAWABLE, drawableResId);
+                if (skinAttr != null) {
+                    viewAttrs.put(skinAttr.attrName, skinAttr);
                 }
             }
-            a.recycle();
         }
+        a.recycle();
     }
 
     private static int[] getProgressBarStyleable() {

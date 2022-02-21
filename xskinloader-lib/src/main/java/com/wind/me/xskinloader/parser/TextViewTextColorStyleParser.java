@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.wind.me.xskinloader.entity.SkinAttr;
 import com.wind.me.xskinloader.entity.SkinConfig;
-import com.wind.me.xskinloader.SkinResDeployerFactory;
+import com.wind.me.xskinloader.entity.SkinConstant;
 import com.wind.me.xskinloader.skinInterface.ISkinStyleParser;
 import com.wind.me.xskinloader.util.ReflectUtils;
 
@@ -34,21 +34,19 @@ public class TextViewTextColorStyleParser implements ISkinStyleParser{
         int textViewStyleableTextColor = getTextViewTextColorStyleableIndex();
 
         TypedArray a = context.obtainStyledAttributes(attrs, textViewStyleable, 0, 0);
-        if (a != null) {
-            int n = a.getIndexCount();
-            for (int j = 0; j < n; j++) {
-                int attr = a.getIndex(j);
-                if (attr == textViewStyleableTextColor &&
-                        SkinConfig.isCurrentAttrSpecified(SkinResDeployerFactory.TEXT_COLOR, specifiedAttrList)) {
-                    int colorResId = a.getResourceId(attr, -1);
-                    SkinAttr skinAttr = SkinAttributeParser.parseSkinAttr(context, SkinResDeployerFactory.TEXT_COLOR, colorResId);
-                    if (skinAttr != null) {
-                        viewAttrs.put(skinAttr.attrName, skinAttr);
-                    }
+        int n = a.getIndexCount();
+        for (int j = 0; j < n; j++) {
+            int attr = a.getIndex(j);
+            if (attr == textViewStyleableTextColor &&
+                    SkinConfig.isCurrentAttrSpecified(SkinConstant.TEXT_COLOR, specifiedAttrList)) {
+                int colorResId = a.getResourceId(attr, -1);
+                SkinAttr skinAttr = SkinAttributeParser.parseSkinAttr(context, SkinConstant.TEXT_COLOR, colorResId);
+                if (skinAttr != null) {
+                    viewAttrs.put(skinAttr.attrName, skinAttr);
                 }
             }
-            a.recycle();
         }
+        a.recycle();
     }
 
     private static int[] getTextViewStyleableList() {

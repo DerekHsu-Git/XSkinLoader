@@ -1,17 +1,17 @@
 package com.wind.me.xskinloader.parser;
 
+import static com.wind.me.xskinloader.entity.SkinConstant.STYLE;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
+import com.wind.me.xskinloader.SkinResDeployerFactory;
 import com.wind.me.xskinloader.StyleParserFactory;
 import com.wind.me.xskinloader.entity.SkinAttr;
 import com.wind.me.xskinloader.entity.SkinConfig;
-import com.wind.me.xskinloader.SkinResDeployerFactory;
 
 import java.util.HashMap;
 
@@ -37,7 +37,7 @@ public class SkinAttributeParser {
         for (int i = 0; i < attrs.getAttributeCount(); i++) {
             String attrName = attrs.getAttributeName(i);
             //处理控件中设置的style属性
-            if ("style".equals(attrName)) {
+            if (STYLE.equals(attrName)) {
                 StyleParserFactory.parseStyle(view, attrs, viewAttrs, specifiedAttrList);
             }
         }
@@ -97,7 +97,7 @@ public class SkinAttributeParser {
     private static SkinAttr getSkinAttrBySplit(Context context, String attrName, String attrValue) {
         try {
             int dividerIndex = attrValue.indexOf("/");
-            String entryName = attrValue.substring(dividerIndex + 1, attrValue.length());
+            String entryName = attrValue.substring(dividerIndex + 1);
             String typeName = attrValue.substring(1, dividerIndex);
             int id = context.getResources().getIdentifier(entryName, typeName, context.getPackageName());
             return new SkinAttr(attrName, id, entryName, typeName);

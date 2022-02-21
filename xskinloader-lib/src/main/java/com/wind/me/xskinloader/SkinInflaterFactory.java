@@ -2,15 +2,16 @@ package com.wind.me.xskinloader;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.AppCompatDelegate;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.LayoutInflater.Factory;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.wind.me.xskinloader.entity.SkinAttr;
 import com.wind.me.xskinloader.entity.SkinConfig;
@@ -36,7 +37,7 @@ public class SkinInflaterFactory implements Factory {
             final AppCompatDelegate delegate = ((AppCompatActivity) activity).getDelegate();
             factory.setInterceptFactory(new Factory() {
                 @Override
-                public View onCreateView(String name, Context context, AttributeSet attrs) {
+                public View onCreateView(@NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs) {
                     return delegate.createView(null, name, context, attrs);
                 }
             });
@@ -50,9 +51,9 @@ public class SkinInflaterFactory implements Factory {
     }
 
     @Override
-    public View onCreateView(String name, Context context, AttributeSet attrs) {
+    public View onCreateView(@NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs) {
         if (SkinConfig.DEBUG) {
-            Log.d(TAG, "SkinInflaterFactory onCreateView(), create view name="+name+"  ");
+            Log.d(TAG, "SkinInflaterFactory onCreateView(), create view name=" + name + "  ");
         }
         View view = null;
         if (mViewCreateFactory != null) {
@@ -100,9 +101,8 @@ public class SkinInflaterFactory implements Factory {
 
     //只有在xml中设置了View的属性skin:enable，才支持xml属性换肤
     public boolean isSupportSkin(AttributeSet attrs) {
-        boolean isSkinEnable = attrs.getAttributeBooleanValue(SkinConfig.SKIN_XML_NAMESPACE,
-                SkinConfig.ATTR_SKIN_ENABLE, false);
-        return isSkinEnable;
+        return attrs.getAttributeBooleanValue(SkinConfig.SKIN_XML_NAMESPACE,
+                SkinConfig.ATTR_SKIN_ENABLE, true);
     }
 
     //获取xml中指定的换肤属性，比如：skin:attrs = "textColor|background", 假如为空，表示支持所有能够支持的换肤属性

@@ -12,12 +12,12 @@ public class SkinAttr {
     public int attrValueRefId;
 
     /***
-     * 属性值refrence id对应的名称，如R.color.XX，则此值为"XX"
+     * 属性值reference id对应的名称，如R.color.XX，则此值为"XX"
      */
     public String attrValueRefName;
 
     /***
-     * 属性值refrence id对应的类型，如R.color.XX，则此值为color
+     * 属性值reference id对应的类型，如R.color.XX，则此值为color
      */
     public String attrValueTypeName;
 

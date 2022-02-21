@@ -6,6 +6,7 @@ import android.view.View;
 import com.wind.me.xskinloader.entity.SkinAttr;
 import com.wind.me.xskinloader.parser.ProgressBarIndeterminateDrawableStyleParser;
 import com.wind.me.xskinloader.parser.TextViewTextColorStyleParser;
+import com.wind.me.xskinloader.parser.ViewStyleParser;
 import com.wind.me.xskinloader.skinInterface.ISkinStyleParser;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class StyleParserFactory {
     static {
         addStyleParser(new TextViewTextColorStyleParser());
         addStyleParser(new ProgressBarIndeterminateDrawableStyleParser());
+        addStyleParser(new ViewStyleParser());
     }
 
     public static void addStyleParser(ISkinStyleParser parser) {
